@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html>
+  <body>
+<h3>For Professionals</h3>
+  <hr>
+  <a href="{% url 'index_all' %}">All</a>
+<div class="card-columns">
+                <!-- Don't change this -->
+                {% for category in categories %}
+                    {% if category.name == 'For Professionals' %}
+                    <!-- You can change this -->
+                            <!-- Don't change this -->
+                            {% include "categorys/partials/index_card.html" %}
+                    {% endif %}
+                <!-- Don't change this -->
+                {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<style>
+  body, html {
+     height: 100%;
+     background-image: radial-gradient(white, #cce5ff, #99caff, #007bff);
+   }
+</style>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<html>
+  <body>
+ <!-- <div class="columns is-mobile">
+  <div class="column is-offset-one-fifth"> -->
+
+
+<div class="field has-addons">
+
+  <div class="control">
+    <form>
+    <input class="input is-large" name="q" type="text" placeholder="Search users..." value="{{ request.GET.q }}">
+  	<button type="submit" class="button is-success">Search</button>
+  
+  </form>
+</div>
+</div>
+
+
+<!-- </div>
+</div> -->
+
+<div class="column is-one-quarter">
+
+    <form role="form" method="POST" action="{% url 'send_direct' %}">
+      {% csrf_token %}
+    <article class="media">
+      <figure class="media-left">
+
+      </figure>
+      <div class="media-content">
+        <input type="search" name="to_user" value="{{ active_direct }}" placeholder="Enter User">
+        <div class="field">
+          <p class="control">
+              <textarea class="textarea" name="body" placeholder="Write a message..."></textarea>
+
+          </p>
+        </div>
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <button type="submit" name="action" class="button is-info">Send</button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </article>
+    </form>
+
+
+</div>
+
+  </body>
+</html>
+
+<style>
+ 
+   body, html {
+        height: 100%;
+        background: fixed radial-gradient(white, #cce5ff, #99caff, #007bff);
+        }
+  .control {
+    margin-top: 6rem;
+    margin-left: 4rem;
+  }
+</style>
+{% endblock %}

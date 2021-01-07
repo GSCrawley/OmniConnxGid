@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+<!-- new-wiki-form.html -->
+
+<!-- This is the form page for creating a new post.
+Its bear, needs plenty of style-->
+
+<!-- Don't change this -->
+{% block content %}
+<html>
+    <body>
+        <div class="">
+            <!-- Don't change this -->
+            <form method="POST">
+
+                <!-- Don't change this -->
+                {% csrf_token %}
+
+                <!-- Don't change this -->
+                {{ form.as_p }}
+
+                <!-- Don't change this -->
+                <input type='submit' value="Post">
+        </div>
+<!-- Don't change this -->
+<form method="POST">
+
+    <!-- Don't change this -->
+    {% csrf_token %}
+
+    <!-- Don't change this -->
+    {{ form.as_p }}
+
+    <!-- Don't change this -->
+    <input type='submit' value="Post">
+
+</form>
+</body>
+</html>
+
+
+<style>
+
+    body, html {
+      height: 100%;
+      background: fixed radial-gradient(white, #cce5ff, #99caff, #007bff);
+    }
+    .container, .container-sm, .container-md, .container-lg {
+    margin-top: 8rem;
+    max-width: 960px;
+}
+
+    </style>
+
+<!-- Don't change this -->
+{% endblock %}

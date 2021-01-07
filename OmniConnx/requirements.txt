@@ -1,0 +1,12 @@
+django==2.2.7
+pytz==2019.3
+django-crispy-forms
+Pillow
+djangorestframework
+gunicorn
+dj-database-url
+psycopg2-binary
+django_comments_xtd
+boto3
+django-storages
+django_heroku

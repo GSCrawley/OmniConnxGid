@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+  <body>
+<div class="main-alt">
+<nav class="menu" tabindex="0">
+  <div class="smartphone-menu-trigger"></div>
+  {% if user.is_authenticated %}
+  <header class="avatar">
+          <img class="rounded-circle sm account-img img-fluid" alt="Responsive image" style="width:150px; height:150;margin-left:-2rem; position:inherit;" src="{{ user.profile.image.url }}">
+          <!-- <div id="welcome">
+            <h5>{{user.username}}</h5>
+        </div> -->
+      </header>
+      <!-- {% include 'header.html' %} -->
+          {% endif %}
+  
+    </div>
+
+    <div class="grid container" style="margin-left:-10rem; margin-top:5rem">
+      <main>
+      {% if user.is_authenticated %}
+    <div class="row">
+  <div class="card-columns" style="column-count:4 ; margin:auto;">
+        {% for category in categories %}
+            <!-- <a href="{% url 'index' parent_or_child='parent' pk=category.id %}"> -->
+                    {% include "categories/partials/index_card.html" %}
+            </a>
+
+        {% endfor %}
+        </div>
+      </div>
+    
+
+{% endif %}
+  </main>
+    {% include 'sidebar.html' %}
+
+</body>
+
+  </html>
+
+<style>
+  .main-alt {
+       width: auto;
+   }
+   #welcome {
+    /* margin-left: 2rem; */
+    /* margin-top: 6rem; */
+    position: relative;
+    
+   }
+
+   #welcome h5 {
+    color:whitesmoke;
+    padding:2rem;
+    padding-left:2.5rem;
+    padding-top:11.5rem;
+   }
+
+   .avatar {
+     margin-left: 2rem;
+     margin-top:5rem;
+     inline-size: 150%;
+   }
+
+    .grid.container {
+      padding-top:4rem;
+    }
+
+</style>
+  {% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+<!-- post.html -->
+<!-- This is just a page that shows the post.
+Dont change anything inbetween jinja brackets.
+Do what ever you want -->
+
+<!-- Don't change this -->
+{% block content %}
+<html>
+    <body>
+
+
+    <div class="row" style="margin-top:5rem; margin-left:50px;">
+      <div class="col m-4">
+         <!-- Don't change this -->
+        <h3>{% csrf_token %}{{ post.title }} <small class="text-muted">Last updated {{ post.modified|date:"SHORT_DATETIME_FORMAT" }} by <b>{{ post.author.username }}</b></small></h3>
+
+        <hr>
+        <!-- Don't change this -->
+        <p>{% csrf_token %}{{ post.content|linebreaksbr }}</p>
+
+
+        <hr>
+        <!-- Don't change this -->
+        <a href="/index">Back to List</a>
+
+      </div>
+    </div>
+
+        {% if user.is_authenticated %}
+        {% csrf_token %}
+            {% if user.username == post.author.username %}
+                <a class="btn btn-primary" style="margin-top:5rem; margin-left:50px; height:40px;" href="{% url 'edit-post' post.id %}">Edit</a>
+                <a class="btn btn-primary" style="margin-top:5rem; margin-left:50px; height:40px;" href="{% url 'delete-post' post.id %}">Delete</a>
+            {% endif %}
+        {% endif %}
+
+        <!-- {% for comment in listing.comments.all %}
+        <div class="date">{{ comment.created_date }}</div>
+        <h6><strong>{{ comment.author }}</strong></h6>
+        <strong><p>{{ comment.text }}</p></strong>
+        <hr>
+        {% empty %}
+        {% endfor %} -->
+        
+
+
+
+
+    <hr>
+
+
+
+</body>
+</html>
+
+
+<style>
+
+    body, html {
+      height: 100%;
+
+      background: fixed radial-gradient(white, #cce5ff, #99caff, #007bff) !important;
+    }
+
+
+
+</style>
+    <!-- Don't change this -->
+{% endblock %}

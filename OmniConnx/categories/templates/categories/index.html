@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+<!-- listings.html -->
+
+
+
+{% block content %}
+<html>
+  <body>
+      <!-- {% include 'header.html' %} -->
+
+
+
+
+  <main>
+
+    <div class="post">
+
+        <div class="timeline" style="width:1200px; margin-top:5rem;">
+
+      {% for listing in listings %}
+
+          <li class="list-group-item">
+              <div class="text_size">
+                  {% include "categories/partials/listing_card.html" %}
+              </div>
+          </li>
+      {% endfor %}
+          </div>
+        </div>
+
+  </main>
+
+
+
+
+{% include 'sidebar.html' %}
+<!-- New Message Notifications -->
+    <div class="fixed-right">
+        {% for direct in directs %}
+            {% if direct.is_read == False %}
+                        <div class="text_size" style="margin-right: 2">
+                            <a href="{% url 'inbox' %}" class="btn btn-danger ml-2">Unread Message From: {{ direct.sender.profile.user }} </a>
+                        </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

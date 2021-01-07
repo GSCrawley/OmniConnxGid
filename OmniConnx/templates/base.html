@@ -1,0 +1,61 @@
+{% load static %}
+
+<!doctype html>
+<!-- base.html
+<!-- This base template just says the name of the user in the navbar if they are logged in.
+feel free to change the style of anything. The only things I do not want changed
+are the href's and jinja brackets you can litterally do whatever-->
+
+<html lang="en">
+  <head>
+    {% load static %}
+    {% csrf_token %}
+    {% load comments %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://kit.fontawesome.com/e7c15fdb77.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <title>OmniConnx</title>
+  </head>
+  <body>
+
+    {% include './navbar.html' %}
+
+    {% block content %}
+
+      <main class="container>
+        
+          <div class="row">
+            <div class="col m-4">
+              <div class="alert alert-warning" role="alert">
+                If you see this, you forgot <code>{% verbatim %}{% block content %}{% endblock %}{% endverbatim %}</code> in your child template.
+              </div>
+            </div>
+          </div>
+      </main>
+
+
+      {% endblock %}
+
+
+
+
+      <!-- I am not sure what this is, you can change it all to what ever bootstrap or whatever -->
+      <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+      </script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        <!-- integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+      </script>  -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+      </script> 
+    </body>
+  </html>
+
+  <style>
+
+  </style>
