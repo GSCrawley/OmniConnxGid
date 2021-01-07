@@ -3755,7 +3755,6 @@ Msg.factory = function (options = {}) {
 
     let css = `
 		.Msg-overflow-hidden{overflow:hidden}
-
 		.Msg-overlay{background-color:rgba(0, 0, 0, 0.7)}
 		.Msg-window{background-color:white;color:#222222}
 		.Msg-titlebar{background-color:#c8c8c8;color:#222222}
@@ -3765,7 +3764,6 @@ Msg.factory = function (options = {}) {
 		.Msg-window-floating-x:hover{background-color:#2a2a2a}
 		.Msg-overlay-x{color:white}
 		.Msg-overlay-x:hover{background-color:#686868}		
-
 		.Msg-overlay-blue{background-color:rgba(101, 107, 124, 0.7)}
 		.Msg-window-blue{background-color:#4f84b8;color:white}
 		.Msg-titlebar-blue{background-color:#43729f;color:white}
@@ -3773,7 +3771,6 @@ Msg.factory = function (options = {}) {
 		.Msg-window-inner-x-blue:hover{background-color:#476b8f}
 		.Msg-overlay-x-blue{color:white}
 		.Msg-overlay-x-blue:hover{background-color:#747484}	
-
 		.Msg-overlay-red{background-color:rgba(104, 64, 64, 0.7)}
 		.Msg-window-red{background-color:#ca4e4e;color:white}
 		.Msg-titlebar-red{background-color:#af3f3f;color:white}
@@ -3781,7 +3778,6 @@ Msg.factory = function (options = {}) {
 		.Msg-window-inner-x-red:hover{background-color:#9d4d4d}
 		.Msg-overlay-x-red{color:white}
 		.Msg-overlay-x-red:hover{background-color:#805e5e}
-
 		.Msg-overlay-green{background-color:rgba(121, 159, 133, 0.7)}
 		.Msg-window-green{background-color:#58a564;color:white}
 		.Msg-titlebar-green{background-color:#52935c;color:white}
@@ -3789,7 +3785,6 @@ Msg.factory = function (options = {}) {
 		.Msg-window-inner-x-green:hover{background-color:#4e8456}
 		.Msg-overlay-x-green{color:white}
 		.Msg-overlay-x-green:hover{background-color:#7c957c}	
-
 		.Msg-overlay-black{background-color:rgba(121, 121, 121, 0.7)}
 		.Msg-window-black{background-color:#1D1F21;color:white}
 		.Msg-titlebar-black{background-color:#3c3c3c;color:white}
@@ -3797,7 +3792,6 @@ Msg.factory = function (options = {}) {
 		.Msg-window-inner-x-black:hover{background-color:#424242}
 		.Msg-overlay-x-black{color:white}
 		.Msg-overlay-x-black:hover{background-color:#686868}
-
 		.Msg-content-snackbar{padding:1.2em !important}
 		`
 

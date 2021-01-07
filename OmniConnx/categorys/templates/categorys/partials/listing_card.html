@@ -1,0 +1,209 @@
+
+<html>
+
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    </head>
+  
+  
+  <body>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  
+  <div class="card mb-3">
+      <div class="card-header">
+          <h5>{{ listing.title }}</h5>
+          <h6>{{ listing.sub_category }}</h6>
+  
+      </div>
+    <a href="/view/{{ listing.author.profile.slug }}"><img class="rounded-circle" style="width:75px;height:75px;" src="{{ listing.author.profile.image.url }}"></a>
+  
+    <small class="text-muted">Last updated {{ listing.modified|date:"SHORT_DATETIME_FORMAT" }} by <b>{{ listing.author.username }}</b></small>
+    <a class="nav-link" href="/view/{{ listing.author.profile.slug }}">View Profile <span class="sr-only">(current)</span></a>
+  
+    <div class="card-body border-dark">
+  
+  <span class="truncated-paragraph-1" style="display:inline; pointer-events: none;">
+    {{ listing.content | truncatewords_html:20}}...</span>
+  <span class="normal-paragraph-1" style="display:none;">
+    {{ listing.content }}</span>
+  
+        <hr>
+  </a>
+         <a href="#" class="read-more-1" style="justify-content: right;">Read more</a>
+         <a href="#" class="read-less-1" style="justify-content: right;">Read Less</a>
+    </div>
+         <hr>
+  
+  <script type="text/javascript">
+    $('[class^="read-more"]').click(function(element) {
+  element.preventDefault()
+  $(`.truncated-paragraph-${elId($(this))}`).hide()
+  $(`.normal-paragraph-${elId($(this))}`).show()
+  })
+  
+  $('[class^="read-less"]').click(function(element) {
+  element.preventDefault()
+  $(`.normal-paragraph-${elId($(this))}`).hide()
+  $(`.truncated-paragraph-${elId($(this))}`).show()
+  })
+  
+  function elId(element) {
+  
+  let elClassName = element.attr('class').split('-')
+  return elClassName[elClassName.length - 1]
+  }
+  
+  </script>
+  
+  <div>
+    <!-- <a type="button" class="btn" data-toggle="modal" data-target="#newComment"> New Comment</a> -->
+    <a href="{% url 'add_comment_to_post' pk=listing.id %}" type="button" class="btn"> New Comment</a>
+    <div class="modal fade" id="newComment" tabindex="-1" aria-labelledby="commentsModalLabel" aria-hidden="true">  
+  
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="commentsModalLabel">New Comment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <div class="post-form" style="margin-top:5rem; margin-left:5rem;">
+            <h1>New comment</h1>
+                  <form method="POST" id="csrf_token" action="."  class="post-form">
+                    {{ csrf_input }}
+                      {{ form.as_table }}
+                      <button type="submit" class="save btn btn-primary" name="send-button">Send</button>
+                  </form>
+          </div>
+            </a>
+        </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    <a
+    class="btn"
+    data-toggle="collapse"
+    data-target="#post-{{listing.id}}"
+    data-text="Collapse">
+    - Comments -
+  </a>
+  
+  <div class="block collapse" id="post-{{listing.id}}">
+    <div class="block__content">
+      <a href="{% url 'post' pk=listing.id %}">Comments: {{ post.comments.all }}</a>
+  
+  {% for comment in listing.comments.all %}
+  <div class="date">{{ comment.created_date }}</div>
+  <h6><strong>{{ comment.author }}</strong></h6>
+  <strong><p>{{ comment.text }}</p></strong>
+  <hr>
+  {% empty %}
+  <p>No comments here yet :(</p>
+  {% endfor %}
+  
+  
+  
+  </div>
+  
+  </div>
+  
+  
+     <script>
+      //     var num = 1;
+      //     var dots = document.getElementsByName("dots");
+      //     var moreText = document.getElementsByName("more");
+      //     var btnText = document.getElementsByName("myBtn");
+  
+      //   if (dots.style.display === "none") {
+      //     dots.style.display = "inline";
+      //     btnText.innerHTML = "Read more";
+      //     moreText.style.display = "none";
+      //   } else {
+      //     dots.style.display = "none";3
+      //     btnText.innerHTML = "Read less";
+      //     moreText.style.display = "inline";
+      //   }
+    //  }
+     </script>
+  
+  <script>
+  
+    const triggers = Array.from(document.querySelectorAll('[data-toggle="collapse"]'));
+  
+    window.addEventListener('click', (ev) => {
+      const elm = ev.target;
+      if (triggers.includes(elm)) {
+        const selector = elm.getAttribute('data-target');
+        collapse(selector, 'toggle');
+      }
+    }, false);
+  
+  
+    const fnmap = {
+      'toggle': 'toggle',
+      'show': 'add',
+      'hide': 'remove'
+    };
+    const collapse = (selector, cmd) => {
+      const targets = Array.from(document.querySelectorAll(selector));
+      targets.forEach(target => {
+        target.classList[fnmap[cmd]]('show hide');
+      });
+    };
+    </script>
+  
+  
+  <script>
+    $('#newComment').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('whatever') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-title').text('New message to ' + recipient)
+    modal.find('.modal-body input').val(recipient)
+  });
+  </script>
+  </body>
+  
+  <style>
+  
+  @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
+   html, body {
+     font-family: 'Encode Sans Expanded', sans-serif;
+     height: 100%;
+  
+  }
+  *, ::after, ::before {
+     box-sizing: border-box; 
+  }
+   .collapse {
+     display: block;
+     max-height: 0px;
+     overflow: hidden;
+     transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  }
+  .collapse.show {
+     max-height: 99em;
+     transition: max-height 0.5s ease-in-out;
+  }
+  .block {
+     margin-top: 10px;
+     background: #f5f5f5;
+     padding: 0;
+  }
+  .block__content {
+     border: 1px solid #ccc;
+     padding: 1.5em;
+     height: 100%;
+  }
+  
+    </style>
+  </html>

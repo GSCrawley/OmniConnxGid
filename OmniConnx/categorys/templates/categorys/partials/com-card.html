@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -11,7 +10,7 @@
 
 
 <body>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <div class="card mb-3">
     <div class="card-header">
@@ -26,9 +25,9 @@
 
   <div class="card-body border-dark">
 
-<span class="truncated-paragraph-1" style="display:inline; pointer-events: none;">
+<span class="truncated-paragraph-1" style="display:none; pointer-events: none;">
   {{ listing.content | truncatewords_html:20}}...</span>
-<span class="normal-paragraph-1" style="display:none;">
+<span class="normal-paragraph-1" style="display:inline;">
   {{ listing.content }}</span>
 
       <hr>
@@ -57,13 +56,12 @@ let elClassName = element.attr('class').split('-')
 return elClassName[elClassName.length - 1]
 }
 
-</script>
+</script> -->
 
 <div>
-  <!-- <a type="button" class="btn" data-toggle="modal" data-target="#newComment"> New Comment</a> -->
-  <a href="{% url 'add_comment_to_post' pk=listing.id %}" type="button" class="btn"> New Comment</a>
-  <div class="modal fade" id="newComment" tabindex="-1" aria-labelledby="commentsModalLabel" aria-hidden="true">  
-
+  <a type="button" class="btn" data-toggle="modal" data-target="#newComment"> New Comment</a>
+  <!-- <a href="{% url 'add_comment_to_post' pk=listing.id %}" type="button" class="btn"> New Comment</a> -->
+  <div class="modal fade" id="newComment" tabindex="-1" aria-labelledby="commentsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -76,7 +74,7 @@ return elClassName[elClassName.length - 1]
         <div class="post-form" style="margin-top:5rem; margin-left:5rem;">
           <h1>New comment</h1>
                 <form method="POST" id="csrf_token" action="."  class="post-form">
-                  {{ csrf_input }}
+                  {% csrf_token %}
                     {{ form.as_table }}
                     <button type="submit" class="save btn btn-primary" name="send-button">Send</button>
                 </form>
@@ -100,6 +98,8 @@ return elClassName[elClassName.length - 1]
     <a href="{% url 'post' pk=listing.id %}">Comments: {{ post.comments.all }}</a>
 
 {% for comment in listing.comments.all %}
+{% for comment in post.comments.all %} 
+<div class="comment">
 <div class="date">{{ comment.created_date }}</div>
 <h6><strong>{{ comment.author }}</strong></h6>
 <strong><p>{{ comment.text }}</p></strong>
@@ -108,6 +108,19 @@ return elClassName[elClassName.length - 1]
 <p>No comments here yet :(</p>
 {% endfor %}
 
+<div class="container" id="comments_section" style="background-color:lightcyan; border-width:0px; border-color: black"> -->
+
+  <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+
+{% for comment in post.comments.all %} 
+<div class="comment">
+    <div class="date">{{ comment.created_date }}</div>
+    <strong>{{ comment.author }}</strong>3
+    <p>{{ comment.text|linebreaks }}</p>
+</div> 
+{% empty %}
+<p>No comments here yet :(</p>
+{% endfor %} 
 
 
 </div>
@@ -178,11 +191,11 @@ return elClassName[elClassName.length - 1]
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
  html, body {
 	 font-family: 'Encode Sans Expanded', sans-serif;
-	 height: 100%;
+	 height: auto;
 
 }
 *, ::after, ::before {
-	 box-sizing: border-box; 
+	 box-sizing: border-box;
 }
  .collapse {
 	 display: block;
