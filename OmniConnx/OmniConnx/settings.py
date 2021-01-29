@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'users',
 
     'message',
-    # 'storages'
+    'storages',
 ]
 
 SITE_ID=1
@@ -101,7 +101,8 @@ EMAIL_HOST_PASSWORD = 'yourpassword'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+    # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -156,30 +157,30 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'staticfiles'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 WIKI_PAGE_TITLE_MAX_LENGTH = 600
 
-# AWS_ACCESS_KEY_ID = 'AWS_ACCESS_KEY_ID'
-# AWS_SECRET_ACCESS_KEY = 'AWS_SECRET_ACCESS_KEY'
-#
-# AWS_STORAGE_BUCKET_NAME = 'AWS_STORAGE_BUCKET_NAME'
-#
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAULT_ACL = None
-#
-#
-#
-# # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = 'AKIAT4BYMASPECGCPRSK'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'omniconnx-static'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-# AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+AWS_LOCATION = 'static'
+
+
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 if 'DATABASE_URL' in os.environ:
     import dj_database_url

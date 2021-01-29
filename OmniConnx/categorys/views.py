@@ -199,7 +199,7 @@ class GridView(ListView):
         return render(
             request,
             'grid.html',
-            {'categories': categories, 'listings': listings, 'messages': messages, 'directs':directs}
+            {'categorys': categories, 'listings': listings, 'messages': messages, 'directs':directs}
         )
 
 
